@@ -22,12 +22,12 @@ server.use('/tops', topRoutes);
 server.use('/players', playersRoutes);
 
 server.use('/', (req, res)=>{
-    res.send('Working, go to http://localhost:8000/players')
+    res.send('It Works!')
 })
 
 
 server.listen(PORT, () =>{
-    console.log("Server is running! Ok -> http://localhost:"+PORT);
+    console.log("Server is running!");
 });
 
 //! Errors control <- 4 params -> err, req, res, next
