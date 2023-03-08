@@ -9,7 +9,7 @@ const playerSchema = mongoose.Schema(
     {timestamps: true,
     collection: "players"}
 )
-playerSchema.use("save",function(next){
+playerSchema.pre("save",function(next){
     this.password = bcrypt.hashSync(this.password, 10)
     next()
 })
