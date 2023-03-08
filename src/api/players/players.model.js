@@ -15,4 +15,4 @@ playerSchema.use("save",function(next){
 })
 const Player = mongoose.model("players", playerSchema)
 
-module.exports(Player)
+module.exports = Player
