@@ -8,7 +8,7 @@ const dbLink = process.env.DB_URL;
 const connectDB = async() =>{
     try {
         mongoose.set('strictQuery', true)
-        const db = await mongoose.connect(dbLink);
+        const db = await mongoose.createConnection(dbLink);
         const { host } = db.connection;
         console.log('Connected to host ->' +host);
     } catch (error) {
