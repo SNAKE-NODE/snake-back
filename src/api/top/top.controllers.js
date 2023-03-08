@@ -9,7 +9,6 @@ const getTops = async (req, res, next) => {
         return next(error)
     }
 }
-
 module.exports = {
     getTops
 }
