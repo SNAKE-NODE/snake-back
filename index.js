@@ -14,17 +14,16 @@ const server = express();
 const cors = require('cors');
 server.use(cors());
 
+//! MIDDLEWARES
+server.use(express.json());
+server.use(express.urlencoded({extended: true}));
+
 server.use('/tops', topRoutes);
 server.use('/players', playersRoutes);
 
 server.use('/', (req, res)=>{
     res.send('Working, go to http://localhost:8000/players')
 })
-
-//! MIDDLEWARES
-server.use(express.json());
-server.use(express.urlencoded({extended: true}));
-
 
 
 server.listen(PORT, () =>{
