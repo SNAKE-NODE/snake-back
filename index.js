@@ -3,7 +3,7 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 
 const playersRoutes = require("./src/api/players/players.routes");
-const topRoutes = require("./src/api/players/top.routes");
+const topRoutes = require("./src/api/top/top.routes");
 
 const db = require('./src/utils/db');
 db.connectDB();
@@ -17,10 +17,13 @@ server.use(cors());
 server.use('/tops', topRoutes);
 server.use('/players', playersRoutes);
 
+server.use('/', (req, res)=>{
+    res.send('Working, go to http://localhost:8000/players')
+})
 
 //! MIDDLEWARES
-server.use(express.json());
-server.use(express.urlencoded({extended: true}));
+// server.use(express.json());
+// server.use(express.urlencoded({extended: true}));
 
 
 
