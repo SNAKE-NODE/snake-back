@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 const playerSchema = mongoose.Schema(
     {
         user: {type: String, required: true, unique: true},
-        password: {type: PerformanceServerTiming, trim: true, required: true},
+        password: {type: String, trim: true, required: true},
 
     },
     {timestamps: true,
