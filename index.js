@@ -39,14 +39,3 @@ server.use('/', (req, res)=>{
 server.listen(PORT, () =>{
     console.log("Server is running!");
 });
-
-// //! Errors control <- 4 params -> err, req, res, next
-// server.use((err, req, res, next) => {
-//     return res.status(err.status || 500).json(err.message || "Unknown Error");
-// });
-
-// server.use("*", (req, res, next) => {
-//     const error = new Error("Route not found");
-//     error.status = 404;
-//     next(error); 
-// });
