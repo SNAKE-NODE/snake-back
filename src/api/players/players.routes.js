@@ -1,6 +1,6 @@
-const { newPLayer, login, getPlayersById } = require("./players.controllers");
+const { newPLayer, login, getAllPlayers } = require("./players.controllers");
 const playersRoutes = require("express").Router()
 playersRoutes.post("/registro", newPLayer)
 playersRoutes.post("/login", login)
-playersRoutes.get("/:id", getPlayersById)
+playersRoutes.get("/", getAllPlayers)
 module.exports = playersRoutes
