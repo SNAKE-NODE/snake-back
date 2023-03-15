@@ -12,10 +12,14 @@ const newPLayer = async (req, res, next)=>{
         
     }
 }
-const getAllPlayers = async (req, res, next) => {
+const getPlayersById = async (req, res, next) => {
     try {
-        const players = await Player.find()
-        return res.json(players)
+        const { id } = req.params
+        const player = await Player.findById(id)
+        if(!player){
+            return res.json("Jugador no encontrado, el id no existe")
+        }
+        return res.json(player)
     } catch (error) {
         return next(error)
     }
@@ -38,5 +42,5 @@ const login = async (req, res, next)=>{
     }
 }
 
-module.exports = {newPLayer, getAllPlayers, login}
+module.exports = {newPLayer, getPlayersById, login}
 
