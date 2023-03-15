@@ -3,17 +3,23 @@ const bcrypt = require("bcrypt")
 const { generateSign } = require("../../utils/jwt")
 
 const newPLayer = async (req, res, next)=>{
-try {
-    const newPlayer = await new Player (req.body)
-    await newPlayer.save()
-    return res.status(201).json(newPlayer)
-} catch (error) {
-    next(error)
-    
+    try {
+        const newPlayer = await new Player (req.body)
+        await newPlayer.save()
+        return res.status(201).json(newPlayer)
+    } catch (error) {
+        next(error)
+        
+    }
 }
+const getAllPlayers = async (req, res, next) => {
+    try {
+        const players = await Player.find()
+        return res.json(players)
+    } catch (error) {
+        return next(error)
+    }
 }
-
-
 const login = async (req, res, next)=>{
     try {
         const PlayerToLog = await Player.findOne({user: req.body.user})
@@ -32,5 +38,5 @@ const login = async (req, res, next)=>{
     }
 }
 
-module.exports = {newPLayer, login}
+module.exports = {newPLayer, getAllPlayers, login}
 
