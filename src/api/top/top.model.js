@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 const topSchema = new mongoose.Schema(
     {
         user: [{type: mongoose.Types.ObjectId, ref: "players"}],
-        date: {type: Date, required: true},
+        date: {type: String, required: true},
+        // date: {type: Date, required: true},
         score: {type: Number, required: true}
     },
     {
