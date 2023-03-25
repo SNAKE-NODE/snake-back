@@ -32,7 +32,8 @@ const login = async (req, res, next)=>{
         }
         if (bcrypt.compareSync(req.body.password, PlayerToLog.password)) {
             const token = generateSign(PlayerToLog._id, PlayerToLog.user);
-            return res.status(200).json({token, PlayerToLog})
+            return res.status(200).json({PlayerToLog})
+            // return res.status(200).json({token, PlayerToLog})
             
         } else {
             return res.status(500).json("Contraseña incorrecta")
