@@ -1,3 +1,6 @@
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
 const Player = require("./players.model")
 const bcrypt = require("bcrypt")
 const { generateSign } = require("../../utils/jwt")
@@ -24,24 +27,23 @@ const getPlayersById = async (req, res, next) => {
         return next(error)
     }
 }
-const login = async (req, res, next)=>{
+const login = async (req, res, next) => {
     try {
-        const PlayerToLog = await Player.findOne({user: req.body.user})
-        if (!PlayerToLog) {
-            return req.status(500).json("No existe el usuario")
-        }
-        if (bcrypt.compareSync(req.body.password, PlayerToLog.password)) {
-            const token = generateSign(PlayerToLog._id, PlayerToLog.user);
-            return res.status(200).json({PlayerToLog})
-            // return res.status(200).json({token, PlayerToLog})
-            
-        } else {
-            return res.status(500).json("Contraseña incorrecta")
-        }
+      const playerToLog = await Player.findOne({ user: req.body.user });
+      if (!playerToLog) {
+        return res.status(401).json({ message: "Usuario o contraseña incorrectos" });
+      }
+      if (bcrypt.compareSync(req.body.password, playerToLog.password)) {
+        const token = jwt.sign({ user_id: playerToLog._id }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+        return res.status(200).json({ token, player: playerToLog });
+      } else {
+        return res.status(401).json({ message: "Usuario o contraseña incorrectos" });
+      }
     } catch (error) {
-        next(error)
+      next(error);
     }
-}
+  }
+  
 
 module.exports = {newPLayer, getPlayersById, login}
 
